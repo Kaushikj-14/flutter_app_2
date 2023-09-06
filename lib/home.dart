@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
             final name = users[index]["address"].toString();
             final email = users[index]["city"].toString();
             final place = users[index]["name"].toString();
-            // final port_type = users[index]["chargers"]["evses"]["connector"]["type"].toString();
+            final port_type = users[index]["chargers"][0]["evses"][0]["connector"][0]["type"].toString();
             // final imageUrl = user['']["sites"]['chargers']['imageUrl'];
             return Container(
               padding: const EdgeInsets.all(8),
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [Text(place)],
+                                children: [Text(port_type)],
                               ),
 
                               Column(
