@@ -22,8 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount : users.length,
           itemBuilder: (context,index){
             final user = users[index];
+            final given_lat = users[index]["latitude"].toString();
+            final given_long = users[index]["longitude"].toString();
+            final actual_lat = Text("22.2939420161382");
+            final actula_lon = Text("73.1737424669467");
             final name = users[index]["address"].toString();
-            final email = users[index]["city"].toString();
+            final id = users[index]["chargers"][0]["chargerId"].toString();
             final place = users[index]["name"].toString();
             final port_type = users[index]["chargers"][0]["evses"][0]["connector"][0]["type"].toString();
             // final imageUrl = user['']["sites"]['chargers']['imageUrl'];
@@ -49,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Column(
                                 children: [
-                                  Text(email),
+                                  Text(id),
                                 ],
                               ),
                               Column(
