@@ -22,19 +22,137 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount : users.length,
           itemBuilder: (context,index){
             final user = users[index];
-            final name = users[index].toString();
-            // final email = user['email'];
+            final name = users[index]["address"].toString();
+            final email = users[index]["city"].toString();
+            final place = users[index]["name"].toString();
+            // final port_type = users[index]["chargers"]["evses"]["connector"]["type"].toString();
             // final imageUrl = user['']["sites"]['chargers']['imageUrl'];
-            return ListTile(
-              leading: ClipRRect(
-                borderRadius:BorderRadius.circular(100),
-                // child: Image.network(imageUrl),
+            return Container(
+              padding: const EdgeInsets.all(8),
+              height: 200,
+              color: Colors.white,
+              child: SingleChildScrollView(
+                
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        ListTile(
+                          leading: ClipRRect(
+                            borderRadius:BorderRadius.circular(100),
+                            // child: Image.network(imageUrl),
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(email),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(place)
+                                ],
+                              )
+                            ],
+                          ),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(name),
+                                ],
+                              ),
+                              Row(children: [
+                                Icon(Icons.location_on),
+                                Text('8157 Miles')
+                              ],)
+                            ],
+
+                          ),
+                        ),
+
+
+                        ListTile(
+                          title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.electric_bolt),
+                                  alignment: Alignment.topRight,
+                                  onPressed: () {
+                                    print("Icon Button clicked");
+                                  },
+                                ),
+                                Column(
+                                  children: [
+
+                                    MaterialButton(
+                                      shape: const CircleBorder(),
+                                      color: Colors.grey,
+                                      padding: const EdgeInsets.all(10),
+                                      onPressed: () {},
+                                      child: const Icon(
+                                        Icons.star,
+                                        size: 20,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ]
+                          ),
+
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [Text(place)],
+                              ),
+
+                              Column(
+                                children: [
+                                  MaterialButton(
+                                    shape: const CircleBorder(),
+                                    color: Colors.green,
+                                    padding: const EdgeInsets.all(10),
+                                    onPressed: () {},
+                                    child: const Icon(
+                                      Icons.near_me_sharp,
+                                      size: 22,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+
+
+                              ),
+
+
+
+
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      indent: 25.0,
+                      endIndent: 25.0,
+                    )
+                  ],
+                ),
               ),
-              // title: Text(email),
-              subtitle: Text(name),
             );
           }),
       floatingActionButton: FloatingActionButton(onPressed: fetchUsers),
+      
     );
 
   }
@@ -63,7 +181,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     setState(() {
-      users = result["data"]["sites"][0]["address"];
+
+      // for(var i=0;i<10;i++){
+      //   users = result["data"]["sites"][i];
+      // }
+
+      users = result["data"]["sites"];
+
     });
 
 
